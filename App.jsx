@@ -1,16 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Hello from './src/components/Hello'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Hello bang={true}>World</Hello>
-      <Hello bang={true} style={{ fontSize: 16 }}>World</Hello>
+      <View style={styles.appbar}>
+        <View style={styles.appbarInner}>
+          <Text style={styles.appbarCenter}>Memo App</Text>
+          <Text style={styles.appbarRight}>ログアウト</Text>
+        </View>
+      </View>
+      
+      <View style={styles.memoListItem}>
+        <View>
+          <Text style={styles.memoListItemTitle}>買い物リスト</Text>
+          <Text style={styles.memoListItemDate}> 2022年12月24日 10:00</Text>
+        </View>
+        <View style={styles.memoListButton}>
+          <Text>X</Text>
+        </View>
+      </View>
 
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <View style={styles.circleButton}>
+        <Text style={styles.circleButtonLabel}>+</Text>
+      </View>
+
     </View>
   );
 }
@@ -18,8 +32,69 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#f0f4f8',
   },
+  appbar: {
+    width:"100%",
+    height:104,
+    backgroundColor: "#467fd3",
+    justifyContent: "flex-end",
+  },
+  appbarInner:{
+    alignItems: "center",
+  },
+  appbarRight:{
+    position: "absolute",
+    right: 19,
+    bottom: 16,
+    color: "rgba(255,255,255,0.8)"
+  },
+  appbarCenter:{
+    marginBottom: 8,
+    fontSize: 22,
+    lineHeight: 32,
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
+  memoListItem:{
+    backgroundColor: "#ffffff",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 16,
+    paddingHorizontal: 19,
+    alignItems: "center",
+    borderColor: "rgba(0,0,0,0.15)",
+    borderBottomWidth:1,
+  },
+  memoListItemTitle:{
+    fontSize: 16,
+    lineHeight: 32,
+  },
+  memoListItemDate:{
+    fontSize: 10,
+    lineHeight: 16,
+    color: "#84848484",
+  },
+  circleButton: {
+    backgroundColor: "#467fd3",
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    right: 40,
+    bottom:40,
+    shadowColor: "#000000",
+    shadowOffset: { width:0, height:8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  circleButtonLabel:{
+    color: "#ffffff",
+    fontSize: 40,
+    lineHeight: 40,
+  }
+  
 });
