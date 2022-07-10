@@ -6,12 +6,18 @@ import MemoList from '../components/MemoList';
 import { Feather } from '@expo/vector-icons'; 
 
 
-export default function App() {
+export default function App(props) {
+    const {navigation} = props;
   return (
     <View style={styles.container}>
-    <AppBar />
     <MemoList></MemoList>
-    <CircleButton name="plus" />
+    <MemoList></MemoList>
+    <MemoList></MemoList>
+    <MemoList></MemoList>
+    <CircleButton
+    name="plus"
+    onPress={()=>{ navigation.navigate("MemoCreate");}}
+    />
     </View>
   );
 }
