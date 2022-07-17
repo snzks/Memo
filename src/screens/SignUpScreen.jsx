@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import AppBar from "../components/AppBar";
 import Button from "../components/Button";
 
 export default function SignUpScreen(props) {
     const { navigation } = props;
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     return (
         <View style={styles.container}>
-
             <View style={styles.LogInContainer}>
                 <Text style={styles.title}>Sign Up</Text>
-                <TextInput style={styles.input}>Email</TextInput>
-                <TextInput style={styles.input}>Password</TextInput>
+                <TextInput
+                    style={styles.input}
+                    value={email}
+                    onChangeText={(text) => { setEmail(text); }}
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                    placeholder="Email Adrress"
+                    textContentType="emailAddress"
+                    />
+                
+                <TextInput
+                    style={styles.input}
+                    value={password}
+                    onChangeText={(text) => { setPassword(text); }}
+                    autoCapitalize="none"
+                    placeholder="Password"
+                    secureTextEntry
+                    textContentType="password"
+                />
                 <Button
                     label="Submit"
                     onPress={() => { navigation.navigate("LogIn") }}
