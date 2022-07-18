@@ -39,7 +39,6 @@ export default function App(props) {
         setLoading(false);
       }, (error) => {
         setLoading(false);
-        console.log(error);
         Alert.alert("error");
       });
     }

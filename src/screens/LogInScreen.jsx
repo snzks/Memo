@@ -30,8 +30,6 @@ function handlePress(){
     setLoading(true);
     firebase.auth().signInWithEmailAndPassword(email,password)
     .then((useCredential)=>{
-        const { user } = useCredential;
-        console.log(user.uid);
         navigation.reset({
             index:0,
             routes: [{name: "MemoList"}],

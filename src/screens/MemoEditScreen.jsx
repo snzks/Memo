@@ -61,8 +61,6 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         flex: 1,
-        paddingHorizontal: 27,
-        paddingVertical: 32,
     },
     input: {
         flex: 1,
@@ -70,6 +68,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         lineHeight: 24,
         color: "#000000",
+        paddingTop:32,
+        paddingBottom:32,
+        paddingHorizontal:27,
     }
 
 })
