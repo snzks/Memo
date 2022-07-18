@@ -24,7 +24,6 @@ useEffect(()=>{
   unsubscribe = ref.onSnapshot((snapshot)=>{
     const userMemos = [];
     snapshot.forEach((doc)=>{
-      console.log(doc.id,doc.data());
       const data = doc.data();
       userMemos.push({
         id:doc.id,
