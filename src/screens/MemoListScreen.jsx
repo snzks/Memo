@@ -4,6 +4,7 @@ import CircleButton from '../components/CircleButton';
 import MemoList from '../components/MemoList';
 import LogoutButton from '../components/LogOutButton';
 import firebase from 'firebase';
+import {doc, onSnapshot} from 'firebase/firestore';
 
 export default function App(props) {
   const { navigation } = props;
@@ -14,32 +15,31 @@ export default function App(props) {
     });
   }, []);
 
-  useEffect(() => {
-    const db = firebase.firestore();
-    const { currentUser } = firebase.auth();
-    let unsubscribe = () => { };
-    if (currentUser) {
-      const ref = db.collection(`users/${currentUser.uid}/memos`).orderBy('undatedAt', 'desc');
-      unsubscribe = ref.onSnapshot((snapshot) => {
-        const userMemos = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          userMemos.push({
-            id: doc.id,
-            bodyText: data.bodyText,
-            updatedAt: data.updatedAt.toDate(),
-          });
-        });
-        setMemos(userMemos);
-       
-      }, (error) => {
-        console.log(error);
-        Alert.alert('データの読み込みに失敗しました');
+useEffect(()=>{
+  const db= firebase.firestore();
+  const { currentUser } = firebase.auth();
+  let unsubscribe =()=>{};
+  if(currentUser){
+  const ref = db.collection(`users/${currentUser.uid}/memos`).orderBy('updatedAt','desc');
+  unsubscribe = ref.onSnapshot((snapshot)=>{
+    const userMemos = [];
+    snapshot.forEach((doc)=>{
+      console.log(doc.id,doc.data());
+      const data = doc.data();
+      userMemos.push({
+        id:doc.id,
+        bodyText: data.bodyText,
+        updatedAt: data.updatedAt.toDate(),
       });
-    }
-    return unsubscribe;
-  }, []);
-
+    });
+    setMemos(userMemos);
+  },(error)=>{
+    console.log(error);
+    Alert.alert("error");
+  });
+  }
+  return unsubscribe;
+},[]);
 
   return (
     <View style={styles.container}>

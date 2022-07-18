@@ -16,7 +16,7 @@ export default function MemoCreateScreen(props) {
         const ref = db.collection(`users/${currentUser.uid}/memos`);
         ref.add({
             bodyText,
-            updaatedAt: new Date(),
+            updatedAt: new Date(),
         })
             .then((docRef) => {
                 Alert.alert(docRef.id);
