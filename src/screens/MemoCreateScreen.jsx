@@ -19,7 +19,7 @@ export default function MemoCreateScreen(props) {
             updatedAt: new Date(),
         })
             .then((docRef) => {
-                Alert.alert(docRef.id);
+                
             })
             .catch((error) => {
                 Alert.alert(error);
