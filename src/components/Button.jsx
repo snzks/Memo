@@ -11,7 +11,7 @@ export default function Button(props){
     )
 }
 
-Button.PropTypes = {
+Button.propTypes = {
     label:string.isRequired,
     onPress:func,
 };

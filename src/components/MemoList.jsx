@@ -1,32 +1,49 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { Feather } from '@expo/vector-icons';
-import { useNavigation} from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native";
+import { shape, string, instanceOf, arrayOf } from "prop-types";
 
-export default function MemoList() {
+export default function MemoList(props) {
+    const { memos } = props;
     const navigation = useNavigation();
     return (
-        <TouchableOpacity
-        style={styles.memoListItem}
-        onPress={()=>{ navigation.navigate("MemoDetail");}}
-        >
-            <View>
-                <Text style={styles.memoListItemTitle}>買い物リスト</Text>
-                <Text style={styles.memoListItemDate}> 2022年12月24日 10:00</Text>
-            </View>
-            <View style={styles.memoListButton}>
-                <Text>
-                    <TouchableOpacity
-                    style={styles.memoDelete}
-                    onPress={()=>{ Alert.alert("Are you sure?");
-                    }}>
-                        <Feather name="x" size={16} color="#B0b0b0b0" />
-                    </TouchableOpacity>
-                </Text>
-            </View>
-        </TouchableOpacity>
+        <View>
+            { memos.map((memo) => (
+                <TouchableOpacity
+                    key={memo.id}
+                    style={styles.memoListItem}
+                    onPress={() => { navigation.navigate("MemoDetail"); }}
+                >
+                    <View>
+                        <Text style={styles.memoListItemTitle}>{memo.bodyText}</Text>
+                        <Text style={styles.memoListItemDate}> {String(memo.updatedAt)}</Text>
+                    </View>
+                    <View style={styles.memoListButton}>
+                        <Text>
+                            <TouchableOpacity
+                                style={styles.memoDelete}
+                                onPress={() => {
+                                    Alert.alert("Are you sure?");
+                                }}>
+                                <Feather name="x" size={16} color="#B0b0b0b0" />
+                            </TouchableOpacity>
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            ))}
+
+        </View>
     )
 }
+
+MemoList.propTypes = {
+    memos: arrayOf(shape({
+        id: string,
+        bodyText: string,
+        updatedAt: instanceOf(Date),
+    })).isRequired,
+};
 
 const styles = StyleSheet.create({
     memoListItem: {
@@ -48,7 +65,7 @@ const styles = StyleSheet.create({
         lineHeight: 16,
         color: "#84848484",
     },
-    memoDelete:{
+    memoDelete: {
         padding: 10,
     }
 })
